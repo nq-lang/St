@@ -1,0 +1,36 @@
+{
+  "name": "QQQ Options Terminal (C++23)",
+  "image": "mcr.microsoft.com/devcontainers/cpp:1-ubuntu-24.04",
+
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {
+      "password": "terminal",
+      "webPort": "6080",
+      "vncPort": "5901"
+    }
+  },
+
+  "onCreateCommand": "bash .devcontainer/setup.sh",
+
+  "postCreateCommand": "cmake -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build -j$(nproc)",
+
+  "forwardPorts": [6080],
+  "portsAttributes": {
+    "6080": {
+      "label": "Terminal Display (noVNC)",
+      "onAutoForward": "openBrowser"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "twxs.cmake"
+      ]
+    }
+  },
+
+  "remoteUser": "vscode"
+}
